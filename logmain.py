@@ -21,7 +21,7 @@ def init_page(title, layout, icon):
 init_page('Ship Logs','wide',':bulb:')
 tabs = ['Main', 'Deck', 'Engine', 'ORB-1','ORB-2','Cargo Record', 'Garbage', 'ODS', 'NoX', 'SoX']
 tabMain, tabDk, tabEn, tabOrb1, tabOrb2, tabCargo, tabGarbage, tabODS, tabNox, tabSoX = st.tabs(tabs)
-dfShip = pd.read_excel('mydata.xlsx', sheet_name=sheet)
+dfShip = pd.read_excel('mydata.xlsx', sheet_name="ship")
 
 with st.sidebar:
     st.markdown(f"## :orange[Electronic Logs Application]", help="Click radio button to select")
