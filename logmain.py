@@ -18,21 +18,10 @@ def init_page(title, layout, icon):
     st.markdown(style, unsafe_allow_html=True)
     return
 
-def get_shipdata(sheet):
-    #app = xw.App(visible=False)
-    #wb = xw.Book('mydata.xlsx')
-    #sheet = wb.sheets['ship']
-    #dfShip = sheet['A1'].options(pd.DataFrame,index=False,expand='table').value  
-    #wb.close()
-    #app.quit()
-    dfShip = pd.read_excel('mydata.xlsx', sheet_name=sheet)
-    return dfShip
-
-
 init_page('Ship Logs','wide',':bulb:')
 tabs = ['Main', 'Deck', 'Engine', 'ORB-1','ORB-2','Cargo Record', 'Garbage', 'ODS', 'NoX', 'SoX']
 tabMain, tabDk, tabEn, tabOrb1, tabOrb2, tabCargo, tabGarbage, tabODS, tabNox, tabSoX = st.tabs(tabs)
-dfShip = get_shipdata("ship")
+dfShip = pd.read_excel('mydata.xlsx', sheet_name=sheet)
 
 with st.sidebar:
     st.markdown(f"## :orange[Electronic Logs Application]", help="Click radio button to select")
