@@ -3,7 +3,7 @@ import pandas as pd
 
 def tabMach_arr(tab):
     with tab:
-        col1, col2, col3, col4 = st.columns([0.2,0.3,0.25,0.25])
+        col1, col2, col3, col4 = st.columns([0.2,0.3,0.1,0.2,0.2])
         with col1:
             st.selectbox("Watch",["0000:0400","0400-0800","0800-1200"],index=0)
         with col2:
@@ -14,9 +14,11 @@ def tabMach_arr(tab):
             #                    from yahoo finance at this time. Note : When column \'Current\' only contains \'-\', it means that current \
             #                    values have not been successfully downloaded.", horizontal=True)
         with col3:
-            st.markdown("Section Status: 🔴") #:red_circle:")
+
         with col4:
-            st.markdown("Section Status: 🔴")
+            st.markdown("Section Status: 🔴") #:red_circle:")
+        with col5:
+            st.markdown("Log Book Status: 🔴")
             #st.markdown("Log Book Status: 🟢")
         if selected=="Main Engine":
             dfME = pd.read_excel("erlb.xlsx",sheet_name="mainengine",
