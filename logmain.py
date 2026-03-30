@@ -1,6 +1,9 @@
 import pandas as pd
 import streamlit as st
 import xlwings as xw
+import mainpage
+import mach
+import deck
 
 def init_page(title, layout, icon):
     st.set_page_config(page_title=title, layout=layout, page_icon=icon)
@@ -27,3 +30,6 @@ with st.sidebar:
     st.markdown(f"## :orange[Electronic Logs Application]", help="Click radio button to select")
     st.dataframe(dfShip, hide_index=True)
 
+mainpage.tabMain_arr(tabMain)
+mach.tabMach_arr(tabEn)
+deck.tabDeck_arr(tabDk)
