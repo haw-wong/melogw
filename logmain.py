@@ -1,13 +1,13 @@
 import pandas as pd
 import streamlit as st
-import xlwings as xw
 import mainengine
-import system
+import systems
 import generator
+import ship
 
 def init_page(title, layout, icon):
     st.set_page_config(page_title=title, layout=layout, page_icon=icon)
-    #st.write(f'#### :violet[Shipboard Electronic Log Books]')
+    st.write(f'### :violet[Shipboard Engine Room Log]')
     st.markdown("""<style>[data-testid="stElementToolbar"] {display: none;}</style>""",unsafe_allow_html=True)
 
     # Custom CSS to inject
@@ -21,15 +21,27 @@ def init_page(title, layout, icon):
     st.markdown(style, unsafe_allow_html=True)
     return
 
-init_page('Ship Logs','wide',':bulb:')
-tabs = ['ME', 'Generators', 'Systems', 'Aux','Report','Noon Rep', 'Emerg Eqpt']
-tabMe, tabGen, tabSys, tabAux, tabRep, tabNrep, tabEmerg = st.tabs(tabs)
-dfShip = pd.read_excel('mydata.xlsx', sheet_name="ship")
+init_page('ER Log','wide',':bulb:')
+tabs = ['Ship','ME', 'Generators', 'Systems', 'Aux','Report','Noon Rep', 'Emerg Eqpt']
+tabShip, tabMe, tabGen, tabSys, tabAux, tabRep, tabNrep, tabEmerg = st.tabs(tabs)
+
 
 with st.sidebar:
-    st.markdown(f"## :orange[Chief Engineer\'s Log Book]", help="Select system : ")
-    st.dataframe(dfShip, hide_index=True)
-
+    st.header(f" :blue[Control Panel]")
+    st.date_input("Select date ",value='today')
+    st.selectbox("Select watch ", ['0000-0400','0400-0800','0800-1200','1200-1600','1600-2000','2000-2400'])
+    #st.selectbox("Select section ",["Ship", "ME", "Generators","Systems","Aux","Report","Noon Rep", "Emerg Eqpt"])
+    df = pd.DataFrame({
+    'Complete': ['Daily Log','For the Watch','For eachsection','ME','Gen','Systems','Aux','Report','Noon Rep','Emerg Eqpt'],
+    'Status': ['🟢','🟠',' ','🔴','🟠','🟠','🟠','🟠','🟠','🟠']})
+    st.dataframe(df,column_config={
+                "Complete": st.column_config.Column(width=None),
+                "Status": st.column_config.Column(width=12)
+               }, hide_index=True)
+    
+    #st.markdown("Section Status: 🔴🟠🟢⚫️⚪️")
+    
 mainengine.tabMe_arr(tabMe)
 generator.tabGen_arr(tabGen)
-system.tabSys_arr(tabSys)
+systems.tabSys_arr(tabSys)
+ship.tabShip_arr(tabShip)
