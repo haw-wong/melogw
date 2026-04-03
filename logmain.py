@@ -1,9 +1,9 @@
 import pandas as pd
 import streamlit as st
 import xlwings as xw
-import mainpage
-import mach
-import deck
+import mainengine
+import system
+import generator
 
 def init_page(title, layout, icon):
     st.set_page_config(page_title=title, layout=layout, page_icon=icon)
@@ -22,14 +22,14 @@ def init_page(title, layout, icon):
     return
 
 init_page('Ship Logs','wide',':bulb:')
-tabs = ['Main', 'Deck', 'Engine', 'ORB-1','ORB-2','Cargo Record', 'Garbage', 'ODS', 'NoX', 'SoX']
-tabMain, tabDk, tabEn, tabOrb1, tabOrb2, tabCargo, tabGarbage, tabODS, tabNox, tabSoX = st.tabs(tabs)
+tabs = ['ME', 'Generators', 'Systems', 'Aux','Report','Noon Rep', 'Emerg Eqpt']
+tabMe, tabGen, tabSys, tabAux, tabRep, tabNrep, tabEmerg = st.tabs(tabs)
 dfShip = pd.read_excel('mydata.xlsx', sheet_name="ship")
 
 with st.sidebar:
-    st.markdown(f"## :orange[Electronic Logs Application]", help="Click radio button to select")
+    st.markdown(f"## :orange[Chief Engineer\'s Log Book]", help="Select system : ")
     st.dataframe(dfShip, hide_index=True)
 
-mainpage.tabMain_arr(tabMain)
-mach.tabMach_arr(tabEn)
-deck.tabDeck_arr(tabDk)
+mainengine.tabMe_arr(tabMe)
+generator.tabGen_arr(tabGen)
+system.tabSys_arr(tabSys)
