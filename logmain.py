@@ -2,6 +2,10 @@ import pandas as pd
 import streamlit as st
 import mainengine
 import systems
+import auxiliary
+import report
+import noonrep
+import emergeq
 import generator
 import ship
 
@@ -30,10 +34,11 @@ with st.sidebar:
     st.header(f" :blue[Control Panel]")
     st.date_input("Select date ",value='today')
     st.selectbox("Select watch ", ['0000-0400','0400-0800','0800-1200','1200-1600','1600-2000','2000-2400'])
+    st.button("Print PDF", disabled=False)
     #st.selectbox("Select section ",["Ship", "ME", "Generators","Systems","Aux","Report","Noon Rep", "Emerg Eqpt"])
     df = pd.DataFrame({
     'Complete': ['Daily Log','For the Watch','For eachsection','ME','Gen','Systems','Aux','Report','Noon Rep','Emerg Eqpt'],
-    'Status': ['🟢','🟠',' ','🔴','🟠','🟠','🟠','🟠','🟠','🟠']})
+    'Status': ['🟠','🟠',' ','🟠','🔴','🟢','🟢','🟢','🟢','🔴']})
     st.dataframe(df,column_config={
                 "Complete": st.column_config.Column(width=None),
                 "Status": st.column_config.Column(width=12)
@@ -44,4 +49,8 @@ with st.sidebar:
 mainengine.tabMe_arr(tabMe)
 generator.tabGen_arr(tabGen)
 systems.tabSys_arr(tabSys)
+auxiliary.tabAux_arr(tabAux)
+report.tabRep_arr(tabRep)
+noonrep.tabNoon_arr(tabNrep)
+emergeq.tabEmergeq_arr(tabEmerg)
 ship.tabShip_arr(tabShip)
