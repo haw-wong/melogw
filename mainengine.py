@@ -10,7 +10,7 @@ def tabMe_arr(tab):
                 st.markdown(f"##### :blue[Main Engine Temperatures (deg C)]")
             with col2:
                 #st.markdown("Section Status: 🔴🟠🟢⚫️⚪️")
-                st.markdown("Status : 🟠") #:red_circle:")
+                st.markdown("Status : 🟢") #:red_circle:")
             dfME = pd.read_excel("erlb.xlsx",sheet_name="ME",
                             usecols='B:E', skiprows=range(3), # Skip rows before the start
                             nrows=11 - 3)  # Read only the specified number of rows
